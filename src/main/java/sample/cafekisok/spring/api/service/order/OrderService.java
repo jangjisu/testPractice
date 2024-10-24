@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sample.cafekisok.spring.api.controller.order.request.OrderCreateRequest;
+import sample.cafekisok.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.cafekisok.spring.api.service.order.response.OrderResponse;
 import sample.cafekisok.spring.domain.order.Order;
 import sample.cafekisok.spring.domain.order.OrderRepository;
@@ -27,11 +28,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final StockRepository stockRepository;
 
-    /**
-     * 재고 감소 -> 동시성 고민
-     * optimistic lock / pessimistic lock / ... 등을 통해 순차적 처리
-     */
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registerDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registerDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
 
