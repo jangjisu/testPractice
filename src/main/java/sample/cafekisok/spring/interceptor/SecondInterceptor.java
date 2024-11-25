@@ -11,9 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 public class SecondInterceptor implements HandlerInterceptor {
 
-    private SecondInterceptor() {
-    }
-
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {
         log.info("SecondInterceptor preHandle");
