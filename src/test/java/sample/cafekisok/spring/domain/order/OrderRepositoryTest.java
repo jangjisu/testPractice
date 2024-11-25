@@ -3,8 +3,7 @@ package sample.cafekisok.spring.domain.order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
+import sample.cafekisok.spring.IntegrationTestSupport;
 import sample.cafekisok.spring.domain.product.Product;
 import sample.cafekisok.spring.domain.product.ProductRepository;
 import sample.cafekisok.spring.domain.product.ProductSellingStatus;
@@ -19,9 +18,7 @@ import static sample.cafekisok.spring.domain.order.OrderStatus.PAYMENT_COMPLETED
 import static sample.cafekisok.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.cafekisok.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-@DataJpaTest
-class OrderRepositoryTest {
+class OrderRepositoryTest extends IntegrationTestSupport {
     @Autowired
     private OrderRepository orderRepository;
 

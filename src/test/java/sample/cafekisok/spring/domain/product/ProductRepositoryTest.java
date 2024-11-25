@@ -1,10 +1,10 @@
 package sample.cafekisok.spring.domain.product;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
+import sample.cafekisok.spring.IntegrationTestSupport;
 
 import java.util.List;
 
@@ -13,10 +13,9 @@ import static org.assertj.core.api.Assertions.tuple;
 import static sample.cafekisok.spring.domain.product.ProductSellingStatus.*;
 import static sample.cafekisok.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-//@SpringBootTest
-@DataJpaTest
-class ProductRepositoryTest {
+
+@Transactional
+class ProductRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductRepository productRepository;
@@ -35,11 +34,11 @@ class ProductRepositoryTest {
 
         // then
         assertThat(products).hasSize(2)
-                .extracting("productNumber", "name", "sellingStatus")
-                .containsExactlyInAnyOrder(
-                        tuple("001", "아메리카노", SELLING),
-                        tuple("002", "카페라떼", HOLD)
-                );
+            .extracting("productNumber", "name", "sellingStatus")
+            .containsExactlyInAnyOrder(
+                tuple("001", "아메리카노", SELLING),
+                tuple("002", "카페라떼", HOLD)
+            );
 
     }
 
@@ -57,11 +56,11 @@ class ProductRepositoryTest {
 
         // then
         assertThat(products).hasSize(2)
-                .extracting("productNumber", "name", "sellingStatus")
-                .containsExactlyInAnyOrder(
-                        tuple("001", "아메리카노", SELLING),
-                        tuple("002", "카페라떼", HOLD)
-                );
+            .extracting("productNumber", "name", "sellingStatus")
+            .containsExactlyInAnyOrder(
+                tuple("001", "아메리카노", SELLING),
+                tuple("002", "카페라떼", HOLD)
+            );
 
     }
 
@@ -97,11 +96,11 @@ class ProductRepositoryTest {
 
     private Product createProduct(String productNumber, ProductType type, ProductSellingStatus status, String name, int price) {
         return Product.builder()
-                .productNumber(productNumber)
-                .type(type)
-                .sellingStatus(status)
-                .name(name)
-                .price(price)
-                .build();
+            .productNumber(productNumber)
+            .type(type)
+            .sellingStatus(status)
+            .name(name)
+            .price(price)
+            .build();
     }
 }
