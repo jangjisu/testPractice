@@ -2,6 +2,7 @@ package sample.cafekisok.spring.api.service.product;
 
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import sample.cafekisok.spring.IntegrationTestSupport;
 import sample.cafekisok.spring.api.controller.product.dto.request.ProductCreateRequest;
 import sample.cafekisok.spring.api.service.product.response.ProductResponse;
@@ -17,6 +18,7 @@ import static org.assertj.core.api.Assertions.tuple;
 import static sample.cafekisok.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.cafekisok.spring.domain.product.ProductType.HANDMADE;
 
+@Transactional
 class ProductServiceTest extends IntegrationTestSupport {
     @Autowired
     private ProductService productService;
@@ -32,11 +34,6 @@ class ProductServiceTest extends IntegrationTestSupport {
     @BeforeEach
     void setUp() {
         // before method
-    }
-
-    @AfterEach
-    void tearDown() {
-        productRepository.deleteAllInBatch();
     }
 
     @DisplayName("신규 상품을 등록한다. 상품번호는 사장 최근 상품의 상품번호에서 1. 증가한 값이다.")

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import sample.cafekisok.spring.IntegrationTestSupport;
 import sample.cafekisok.spring.api.controller.order.request.OrderCreateRequest;
 import sample.cafekisok.spring.api.service.order.response.OrderResponse;
@@ -22,6 +23,7 @@ import static org.assertj.core.api.Assertions.*;
 import static sample.cafekisok.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.cafekisok.spring.domain.product.ProductType.*;
 
+@Transactional
 class OrderServiceTest extends IntegrationTestSupport {
 
     @Autowired
@@ -39,13 +41,13 @@ class OrderServiceTest extends IntegrationTestSupport {
     @Autowired
     private OrderService orderService;
 
-    @AfterEach
-    void tearDown() {
-        orderProductRepository.deleteAllInBatch();
-        productRepository.deleteAllInBatch();
-        orderRepository.deleteAllInBatch();
-        stockRepository.deleteAllInBatch();
-    }
+//    @AfterEach
+//    void tearDown() {
+//        orderProductRepository.deleteAllInBatch();
+//        productRepository.deleteAllInBatch();
+//        orderRepository.deleteAllInBatch();
+//        stockRepository.deleteAllInBatch();
+//    }
 
     @DisplayName("주문번호 리스트를 받아 주문을 생성한다.")
     @Test

@@ -3,7 +3,6 @@ package sample.cafekisok.spring.api.service.order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sample.cafekisok.spring.api.controller.order.request.OrderCreateRequest;
 import sample.cafekisok.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.cafekisok.spring.api.service.order.response.OrderResponse;
 import sample.cafekisok.spring.domain.order.Order;
@@ -42,11 +41,11 @@ public class OrderService {
     private List<Product> findProductsBy(List<String> productNumbers) {
         List<Product> products = productRepository.findAllByProductNumberIn(productNumbers);
         Map<String, Product> productMap = products.stream()
-                .collect(Collectors.toMap(Product::getProductNumber, p -> p));
+            .collect(Collectors.toMap(Product::getProductNumber, p -> p));
 
         return productNumbers.stream()
-                .map(productMap::get)
-                .toList();
+            .map(productMap::get)
+            .toList();
     }
 
     private void deductStockQuantities(List<Product> products) {
@@ -67,19 +66,19 @@ public class OrderService {
 
     private static List<String> extractStockProductNumbers(List<Product> products) {
         return products.stream()
-                .filter(product -> ProductType.containsStockType(product.getType()))
-                .map(Product::getProductNumber)
-                .toList();
+            .filter(product -> ProductType.containsStockType(product.getType()))
+            .map(Product::getProductNumber)
+            .toList();
     }
 
     private Map<String, Stock> createStockMapBy(List<String> stockProductNumbers) {
         List<Stock> stocks = stockRepository.findAllByProductNumberIn(stockProductNumbers);
         return stocks.stream()
-                .collect(Collectors.toMap(Stock::getProductNumber, s -> s));
+            .collect(Collectors.toMap(Stock::getProductNumber, s -> s));
     }
 
     private static Map<String, Long> createCountingMapBy(List<String> stockProductNumbers) {
         return stockProductNumbers.stream()
-                .collect(Collectors.groupingBy(p -> p, Collectors.counting()));
+            .collect(Collectors.groupingBy(p -> p, Collectors.counting()));
     }
 }

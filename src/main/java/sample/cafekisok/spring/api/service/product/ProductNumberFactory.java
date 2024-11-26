@@ -7,7 +7,7 @@ import sample.cafekisok.spring.domain.product.ProductRepository;
 @RequiredArgsConstructor
 @Component
 public class ProductNumberFactory {
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public String createNextProductNumber() {
         String latestProductNumber = productRepository.findLatestProductNumber();

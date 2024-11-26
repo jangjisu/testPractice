@@ -3,6 +3,7 @@ package sample.cafekisok.spring.domain.order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import sample.cafekisok.spring.IntegrationTestSupport;
 import sample.cafekisok.spring.domain.product.Product;
 import sample.cafekisok.spring.domain.product.ProductRepository;
@@ -18,6 +19,7 @@ import static sample.cafekisok.spring.domain.order.OrderStatus.PAYMENT_COMPLETED
 import static sample.cafekisok.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.cafekisok.spring.domain.product.ProductType.HANDMADE;
 
+@Transactional
 class OrderRepositoryTest extends IntegrationTestSupport {
     @Autowired
     private OrderRepository orderRepository;
